@@ -25,7 +25,7 @@ mysql = MySQL(application)
 #fungsi koneksi ke basis data
 def openDb():
     global conn, cursor
-    conn = pymysql.connect(db="db_perpustakaan", user="root", passwd="",host="localhost",port=3306,autocommit=True)
+    conn = pymysql.connect(db="db_perpus", user="root", passwd="", host="localhost", port=3306, autocommit=True)
     cursor = conn.cursor()	
 
 #fungsi menutup koneksi
@@ -33,3 +33,21 @@ def closeDb():
     global conn, cursor
     cursor.close()
     conn.close()
+
+# generate 8 random unique varchars for a table
+def generate_id(table: str) -> str:
+    openDb()
+    LENGTH = 8
+
+    while True:
+        characters = string.ascii_letters + string.digits
+        generated_string = ''.join(random.choices(characters, k=LENGTH))
+        if table == "staff":
+            cursor.execute(f"SELECT id FROM staff WHERE id = '{generated_string}'")
+        elif table == "buku":
+            cursor.execute(f"SELECT id_buku FROM buku WHERE id_buku = '{generated_string}'")
+        temp = cursor.fetchone()
+        if not temp:
+            break
+    closeDb()
+    return generated_string
