@@ -22,20 +22,21 @@ application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@local
 db = SQLAlchemy(application)    
 mysql = MySQL(application)
 
-#fungsi koneksi ke basis data
+# fungsi koneksi ke basis data
 def openDb():
     global conn, cursor
     conn = pymysql.connect(db="db_perpus", user="root", passwd="", host="localhost", port=3306, autocommit=True)
     cursor = conn.cursor()	
 
-#fungsi menutup koneksi
+# fungsi menutup koneksi
 def closeDb():
     global conn, cursor
     cursor.close()
     conn.close()
 
-# generate 8 random unique varchars for a table
+# generate 8 random unique varchars
 def generate_id(table: str) -> str:
+    # Masukkan argumen "staff" untuk id dan "buku" untuk id_buku
     openDb()
     LENGTH = 8
 
@@ -51,3 +52,13 @@ def generate_id(table: str) -> str:
             break
     closeDb()
     return generated_string
+
+
+# Halaman-halaman dalam aplikasi
+
+
+# Jalankan flask app  
+def main():
+    application.run(debug=True)
+
+main()
