@@ -202,31 +202,35 @@ def generate_id():
     # mendefinisikan fungsi openDb(), cursor, dan closeDb() 
     openDb()
 
-    six_digit_first = 678123
+    current_year = 678
+    current_month = 123
     
     # Mengambil empat digit terakhir dari tahun
-    year_str = str(six_digit_first).zfill(6)
+    year_str = str(current_year).zfill(2)
+    
+    # Mengambil dua digit dari bulan
+    current_month_str = str(current_month).zfill(2)
 
-    # Membuat format NIK tanpa nomor urut terlebih dahulu
-    base_nik_without_number = f"I-{year_str}"
+    # Membuat format nia tanpa nomor urut terlebih dahulu
+    base_id_without_number = f"I-{year_str}{current_month_str}"
 
-    # Mencari NIK terakhir dari database untuk mendapatkan nomor urut
-    cursor.execute("SELECT nik FROM staff WHERE nik LIKE %s ORDER BY nik DESC LIMIT 1", (f"{base_nik_without_number}%",))
-    last_nik = cursor.fetchone()
+    # Mencari nia terakhir dari database untuk mendapatkan nomor urut
+    cursor.execute("SELECT id FROM staff WHERE id LIKE %s ORDER BY id DESC LIMIT 1", (f"{base_id_without_number}%",))
+    last_nia = cursor.fetchone()
 
-    if last_nik:
-        last_number = int(last_nik[0].split("-")[-1])  # Mengambil nomor urut terakhir
+    if last_nia:
+        last_number = int(last_nia[0].split("-")[-1])  # Mengambil nomor urut terakhir
         next_number = last_number + 1
-        # Membuat NIK lengkap dengan nomor urut
-        next_nik = f"P-{str(next_number).zfill(3)}"
+        # Membuat nia lengkap dengan nomor urut
+        next_id = f"I-{str(next_number).zfill(3)}"
     else:
         next_number = 1  # Jika belum ada data, mulai dari 1
-        # Membuat NIK lengkap dengan nomor urut
-        next_nik = f"{base_nik_without_number}{str(next_number).zfill(3)}"
+        # Membuat nia lengkap dengan nomor urut
+        next_id = f"{base_id_without_number}{str(next_number).zfill(3)}"
     
     closeDb()  # untuk menutup koneksi database 
     
-    return next_nik
+    return next_id
 
 #Program utama     
 def main():
