@@ -55,7 +55,11 @@ def generate_id(table: str) -> str:
 
 
 # Halaman-halaman dalam aplikasi
-
+# Home/Dashboard
+@application.route("/")
+def home():
+    #
+    return render_template("home.html")
 
 # Jalankan flask app  
 def main():

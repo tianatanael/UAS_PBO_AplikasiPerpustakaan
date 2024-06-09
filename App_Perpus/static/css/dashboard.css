@@ -1,0 +1,54 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 45px;
+    background-color: white;
+    border-bottom: 1px rgb(239, 60, 60) solid;
+}
+
+.logo a {
+    font-size: xx-large;
+    color: rgb(214, 18, 0);
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: italic;
+    text-decoration: none;
+}
+
+.navigation ul {
+    display: flex;
+    list-style: none;
+}
+
+.navigation ul li {
+    font-family: 'Trebuchet MS', sans-serif;
+    color:rgb(214, 18, 0);
+    margin-left: 20px;
+}
+
+main {
+    display: flex;
+    margin: 3% 10%;
+    flex-direction: column;
+}
+
+.searchBar {
+    text-align: center;
+}
+
+.searchBar input[type=text] {
+    padding: 6px;
+    border: 1px gray solid;
+    font-size: 17px;
+    width: 80%;
+  }
