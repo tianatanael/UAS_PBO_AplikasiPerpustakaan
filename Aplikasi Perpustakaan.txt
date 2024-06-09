@@ -1,0 +1,46 @@
+Aplikasi Perpustakaan
+
+Kasus: Aplikasi berbasis web sebuah perpustakaan. 
+Semua Pengguna dapat: 
+- mengecek ketersediaan buku
+- memprint data buku (nama, author, lokasi dalam perpustakaan)
+
+Staff dapat:
+- tambah, hapus, edit data buku
+
+=====================================================================================
+
+Database:
+1. staff (id, nik, nama, tgllahir, dll)
+2. buku (id_buku, judul, penulis, penerbit, tahunterbit, lokasi tersedia)
+
+HTML:
+1. Homepage/dashboard ("/")
+- Menampilkan buku2 terbaru
+- Search bar untuk mencari buku
+- Tombol untuk pergi ke halaman collection
+- Tombol login untuk staff di pojok
+
+2. Halaman buku ("/collection/id_buku/")
+- Menampilkan data sebuah buku berdasarkan id
+- Tombol print untuk mencetak data buku
+- *Tombol edit dan hapus buku
+
+3. Halaman koleksi ("/collection/")
+- Menampilkan koleksi semua buku yang ada menggunakan table
+- Ada search bar juga
+- *Tombol tambah, edit dan hapus buku
+
+4. Halaman login ("/staff/login/")
+- Halaman login biasa
+- Tombol register ke halaman register
+- Tombol login ke halaman 
+
+5. Halaman register ("/staff/register/")
+- Halaman register biasa
+- Tombol ke login
+- Tombol register
+
+6. *Halaman tambah buku ("/collection/add/")
+
+7. *Halaman edit buku ("/collection/edit/id_buku")
