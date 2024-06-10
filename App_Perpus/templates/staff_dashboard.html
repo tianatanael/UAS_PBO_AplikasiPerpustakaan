@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css2/staff_dashboard.css') }}">
     <title>Home</title>
 </head>
+
+<style>
+    th
+    {
+        text-align: center;
+    }
+</style>
 <body>
 
      <!-- Side navigation -->
@@ -27,14 +34,15 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Id Buku</th>
+                        <th width="8.5%">Id Buku</th>
                         <th>Judul</th>
                         <th>Penulis</th>
-                        <th>Penerbit</th>
+                        <th width="10%">Penerbit</th>
                         <th>Tanggal Terbit</th>
                         <th>Lokasi</th>
-                        <th>Tersedia</th>
-                        <th width="15%">Aksi</th>
+                        <th width="3%">Tersedia</th>
+                        <th width="12.5%">Tanggal Masuk</th>
+                        <th width="9%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,7 +77,7 @@
                     <li class="page-item" id="next"><a class="page-link" href="#">Selanjutnya</a></li>
                 </ul>
             </nav>
-            <a class="right btn btn-primary" href="/staff/collection/tambah">Tambah Buku</a>
+            <a class="right btn btn-primary" href="/staff/collection/tambah/">Tambah Buku</a>
         </div>
         </div>
       </div>
