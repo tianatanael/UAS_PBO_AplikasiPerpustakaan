@@ -42,6 +42,8 @@ def closeDb():
 def home():
     if 'id' in session:
         return redirect(url_for('staff_dashboard'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
 
     openDb()
     container = []
@@ -57,6 +59,8 @@ def home():
 def staff_login():
     if 'id' in session:
         return redirect(url_for('staff_dashboard'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
 
     if request.method == "POST":
         id = request.form["id"]
@@ -75,13 +79,14 @@ def staff_login():
             return render_template("staff_login.html", error="Invalid NIK or password!")
     return render_template("staff_login.html")
 
-
 SECRET_CODE = "0019"
 
 @application.route('/staff/register/', methods=['GET','POST'])
 def staff_register():
     if 'id' in session:
         return redirect(url_for('staff_dashboard'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
 
     generated_id = generate_id()
 
@@ -117,6 +122,8 @@ def staff_register():
 def staff_dashboard():
     if 'id' not in session:
         return redirect(url_for('home'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
 
     openDb()
     container = []
@@ -128,11 +135,77 @@ def staff_dashboard():
     closeDb()
     return render_template('staff_dashboard.html', container=container, home=True)
 
+@application.route('/clear_session1/')
+def clear_session1():
+    session.pop('staff_forgot', None)
+    return redirect(url_for('staff_forgot'))
+
+@application.route('/staff/forgot/', methods=['GET','POST'])
+def staff_forgot():
+    if 'id' in session:
+        return redirect(url_for('home'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
+
+    if request.method == "POST":
+        id = request.form['id']
+        nik = request.form['nik']
+        cur = mysql.connection.cursor()
+
+        cur.execute(f"SELECT id, nik FROM staff WHERE id=%s AND nik=%s", (id,nik))
+        user = cur.fetchone()
+        cur.close()
+        
+        if user:
+            session['staff_forgot'] = user[0]
+            return redirect(url_for('staff_forgot_entry'))
+        else:
+            return render_template('staff_forgot.html', error='Invalid ID or NIK!!!')
+
+    return render_template('staff_forgot.html')
+
+@application.route('/staff/forgot/entry/',  methods=['GET','POST'])
+def staff_forgot_entry():
+    if 'id' in session:
+        return redirect(url_for('home'))
+    if 'staff_forgot' not in session:
+        return redirect(url_for('staff_forgot_entry'))
+
+    if request.method == "POST":
+        password = request.form['password']
+        confirm_pwd = request.form['confirm_password']
+
+        if password != confirm_pwd:
+            return render_template('staff_forgot_entry.html', error='Passwords do not match!')
+
+        hashed_password = generate_password_hash(password) #Hash the password
+
+        cur = mysql.connection.cursor()
+        cur.execute(f"UPDATE staff SET password=%s WHERE id=%s", (hashed_password, session['staff_forgot']))
+        mysql.connection.commit()
+        cur.close()
+
+        session.pop('staff_forgot', None)
+        return redirect(url_for('staff_login'))
+
+    return render_template('staff_forgot_entry.html')
+
+@application.route('/staff/logout/')
+def staff_logout():
+    if 'id' not in session:
+        return redirect(url_for('home'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
+    session.pop('id', None)
+    return redirect(url_for('home'))
+
 #fungsi cetak ke PDF
 @application.route('/print/<id_buku>', methods=['GET'])
 def get_employee_data(id_buku):
     if 'id' in session:
         return redirect(url_for('staff_dashboard'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
 
     # Koneksi ke database
     connection = pymysql.connect(host='localhost',
@@ -164,16 +237,13 @@ def get_employee_data(id_buku):
     finally:
         connection.close()  # Menutup koneksi database setelah selesai
 
-@application.route('/staff/logout/')
-def staff_logout():
-    session.pop('id', None)
-    return redirect(url_for('home'))
-
 #fungsi menghapus data
 @application.route('/staff/collection/hapus/<id>', methods=['GET','POST'])
 def hapus(id):
     if 'id' not in session:
         return redirect(url_for('home'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
     
     openDb()
     cursor.execute('DELETE FROM buku WHERE id_buku=%s', (id))
