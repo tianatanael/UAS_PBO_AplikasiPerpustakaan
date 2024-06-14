@@ -26,12 +26,53 @@
         <div class="searchBar">
             <input type="text" id="searchInput" class="form-control" placeholder="Cari Buku">
         </div>
-        <table class="table table-bordered table-hover">
+        <table class="collection">
             {% for row in container %}
-            <tr>
+            <tr class="row">
                 <td>
-                    
+                    <table class="book">
+                        <tr>
+                            <td class="label">ID</td>
+                            <td>:</td>
+                            <td>{{row[0]}}</td>
+                            
+                        </tr>
+                        <tr>
+                            <td class="label">Judul</td>
+                            <td>:</td>
+                            <td class="value">{{row[1]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Pengarang</td>
+                            <td>:</td>
+                            <td class="value">{{row[2]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Penerbit</td>
+                            <td>:</td>
+                            <td class="value">{{row[3]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Tgl. Terbit</td>
+                            <td>:</td>
+                            <td class="value">{{row[4]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Lokasi</td>
+                            <td>:</td>
+                            <td class="value">{{row[5]}}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Tersedia</td>
+                            <td>:</td>
+                            <td class="value">{{row[6]}}</td>
+                            <td class="value"><a href="">Data Buku →</a></td>
+                        </tr>
+                    </table>
                 </td>
+            </tr>
+            <tr class="row">
+                <td class="space"></td>
             </tr>
             {% endfor %}
         </table>
@@ -39,14 +80,14 @@
 </body>
 <script>
     var currentPage = 1;
-    var itemsPerPage = 4;
-    var totalRows = document.querySelectorAll('tbody tr').length;
+    var itemsPerPage = 2 * 2;
+    var totalRows = document.querySelectorAll('.row').length;
 
     function displayData(page) {
         var startIndex = (page - 1) * itemsPerPage;
         var endIndex = startIndex + itemsPerPage;
 
-        var rows = document.querySelectorAll('tbody tr');
+        var rows = document.querySelectorAll('.row');
         for (var i = 0; i < rows.length; i++) {
             if (i >= startIndex && i < endIndex) {
                 rows[i].style.display = "";
@@ -73,42 +114,42 @@
             }
         }
 
+    displayData(currentPage);
+    updatePaginationButtons();
+
+    document.getElementById('previous').addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            displayData(currentPage);
+            updatePaginationButtons();
+        }
+    });
+
+    document.getElementById('next').addEventListener('click', function() {
+        if (currentPage < Math.ceil(totalRows / itemsPerPage)) {
+            currentPage++;
+            displayData(currentPage);
+            updatePaginationButtons();
+        }
+    });
+
+    document.getElementById('page1').addEventListener('click', function() {
+        currentPage = parseInt(this.textContent);
         displayData(currentPage);
         updatePaginationButtons();
+    });
 
-        document.getElementById('previous').addEventListener('click', function() {
-            if (currentPage > 1) {
-                currentPage--;
-                displayData(currentPage);
-                updatePaginationButtons();
-            }
-        });
+    document.getElementById('page2').addEventListener('click', function() {
+        currentPage = parseInt(this.textContent);
+        displayData(currentPage);
+        updatePaginationButtons();
+    });
 
-        document.getElementById('next').addEventListener('click', function() {
-            if (currentPage < Math.ceil(totalRows / itemsPerPage)) {
-                currentPage++;
-                displayData(currentPage);
-                updatePaginationButtons();
-            }
-        });
-
-        document.getElementById('page1').addEventListener('click', function() {
-            currentPage = parseInt(this.textContent);
-            displayData(currentPage);
-            updatePaginationButtons();
-        });
-
-        document.getElementById('page2').addEventListener('click', function() {
-            currentPage = parseInt(this.textContent);
-            displayData(currentPage);
-            updatePaginationButtons();
-        });
-
-        document.getElementById('page3').addEventListener('click', function() {
-            currentPage = parseInt(this.textContent);
-            displayData(currentPage);
-            updatePaginationButtons();
-        });
+    document.getElementById('page3').addEventListener('click', function() {
+        currentPage = parseInt(this.textContent);
+        displayData(currentPage);
+        updatePaginationButtons();
+    });
 
     // Fungsi pencarian
     document.getElementById('searchInput').addEventListener('keyup', function() {

@@ -38,8 +38,10 @@ body {
 
 main {
     display: flex;
-    margin: 3% 10%;
     flex-direction: column;
+    margin: 0 5%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
 }
 
 .searchBar {
@@ -50,5 +52,41 @@ main {
     padding: 6px;
     border: 1px gray solid;
     font-size: 17px;
+    width: 70%;
+    margin: 3%;
+}
+
+.collection {
+    margin: auto;
+    border: 1px rgb(214, 18, 0) solid;
+    /* background-color: rgb(239, 60, 60); */
+    padding: 12px;
+    padding-bottom: 0;
+    border-radius: 5px;
     width: 80%;
-  }
+}
+
+.collection td {
+    color: black;
+    padding: 5px;
+    border: 1px rgb(214, 18, 0) solid;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.collection .space {
+    border: 0;
+}
+
+.book td{
+    padding: 2px;
+    border: 0;
+}
+
+.book .label {
+    width: 15%;
+}
+
+.book .value {
+    width: 75%;
+}
