@@ -6,7 +6,7 @@ Semua Pengguna dapat:
 - memprint data buku (nama, author, lokasi dalam perpustakaan)
 
 Staff dapat:
-- tambah, hapus, edit data buku
+- tambah buku, hapus buku, edit data buku
 
 =====================================================================================
 
@@ -41,6 +41,8 @@ HTML:
 - Tombol ke login
 - Tombol register
 
-6. *Halaman tambah buku ("/collection/add/")
+6. *Halaman tambah buku ("staff/collection/tambah_buku/")
+- staff mengedit data buku
 
-7. *Halaman edit buku ("/collection/edit/id_buku")
+7. *Halaman edit buku ("/collection/editbuku/<id_buku>")
+- staff mengedit data buku
