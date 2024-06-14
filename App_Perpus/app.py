@@ -228,6 +228,37 @@ def staff_tambah_buku():
     else:
         return render_template('staff_tambah_buku.html', id_buku=generated_id_buku)  # Mengirimkan NIK otomatis ke template
 
+@application.route('/staff/collection/edit/<id_buku>', methods=['GET','POST'])
+def staff_edit_buku(id_buku):
+    if 'id' not in session:
+        return redirect(url_for('home'))
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
+    
+    openDb()
+    cursor.execute('SELECT * FROM buku WHERE id_buku=%s', (id_buku))
+    data = cursor.fetchone()
+    
+    if request.method == "POST":
+        judul = request.form['judul']
+        penulis = request.form['penulis']
+        penerbit = request.form['penerbit']
+        tglterbit = request.form['tglterbit']
+        lokasi = request.form['lokasi']
+        jmlhtersedia = request.form['jmlhtersedia']
+        tglmasuk = request.form['tglmasuk']
+
+        sql = "UPDATE buku SET judul=%s, penulis=%s, penerbit=%s, tglterbit=%s, lokasi=%s, jmlhtersedia=%s, tglmasuk=%s WHERE id_buku=%s"
+        val = (judul, penulis, penerbit ,tglterbit, lokasi, jmlhtersedia, tglmasuk, id_buku)
+        cursor.execute(sql, val)
+        conn.commit()
+        closeDb()
+        return redirect(url_for('staff_dashboard'))
+    
+    else:
+        closeDb()
+        return render_template('staff_edit_buku.html', data=data)
+
 #fungsi cetak ke PDF
 @application.route('/print/<id_buku>', methods=['GET'])
 def get_employee_data(id_buku):
