@@ -16,26 +16,37 @@
         </div>
         <nav class="navigation">
             <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                {% if id %}
+                <li><a id="link-tambah" href="/staff/collection/tambah">Tambah</a></li>
+                {% endif %}
+                {% if id %}
+                <li><a href="/staff/logout/">Logout</a></li>
+                {% else %}
+                <li><a href="/staff/login/">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
     <main>
         <div class="searchBar">
-            <input type="text" id="searchInput" class="form-control" placeholder="Cari Buku">
+            <input type="text" id="searchInput" onkeyup="search()" placeholder="Cari Buku Berdasarkan ID/Judul/Pengarang">
         </div>
         <table class="collection">
             {% for row in container %}
+            <div class="item">
             <tr class="row">
                 <td>
                     <table class="book">
                         <tr>
                             <td class="label">ID</td>
                             <td>:</td>
-                            <td>{{row[0]}}</td>
-                            
+                            <td class="value">{{row[0]}}</td>
+                            {% if id %}
+                            <td class="link-edit"><a href="/staff/collection/edit/{{row[0]}}">Edit Buku →</a></td>
+                            {% endif %}
                         </tr>
                         <tr>
                             <td class="label">Judul</td>
@@ -50,23 +61,23 @@
                         <tr>
                             <td class="label">Penerbit</td>
                             <td>:</td>
-                            <td class="value">{{row[3]}}</td>
+                            <td class="">{{row[3]}}</td>
                         </tr>
                         <tr>
                             <td class="label">Tgl. Terbit</td>
                             <td>:</td>
-                            <td class="value">{{row[4]}}</td>
+                            <td class="">{{row[4]}}</td>
                         </tr>
                         <tr>
                             <td class="label">Lokasi</td>
                             <td>:</td>
-                            <td class="value">{{row[5]}}</td>
+                            <td class="">{{row[5]}}</td>
                         </tr>
                         <tr>
                             <td class="label">Tersedia</td>
                             <td>:</td>
-                            <td class="value">{{row[6]}}</td>
-                            <td class="value"><a href="">Data Buku →</a></td>
+                            <td class="">{{row[6]}}/{{row[7]}}</td>
+                            <td class="link"><a href="">Data Buku →</a></td>
                         </tr>
                     </table>
                 </td>
@@ -74,13 +85,24 @@
             <tr class="row">
                 <td class="space"></td>
             </tr>
+            </div>
             {% endfor %}
         </table>
+        <div class="pagination">
+            <p class="page-item" id="previous"><button class="page-link" href="#">Sebelumnya</button></p>
+            <p class="page-item" id="page1"><button class="page-link btn btn-link">1</button></p>
+            <p class="page-item" id="page2"><button class="page-link btn btn-link">2</button></p>
+            <p class="page-item" id="page3"><button class="page-link btn btn-link">3</button></p>
+            <p class="page-item" id="next"><button class="page-link" href="#">Selanjutnya</button></p>
+        </div>
     </main>
-</body>
+    <!-- Pagination -->
+    <footer>
+        
+    </footer>
 <script>
     var currentPage = 1;
-    var itemsPerPage = 2 * 2;
+    var itemsPerPage = 10 *2;
     var totalRows = document.querySelectorAll('.row').length;
 
     function displayData(page) {
@@ -152,19 +174,48 @@
     });
 
     // Fungsi pencarian
-    document.getElementById('searchInput').addEventListener('keyup', function() {
-        var searchText = this.value.toLowerCase();
-        var rows = document.querySelectorAll('tbody tr');
-        for (var i = 0; i < rows.length; i++) {
-            var rowText = rows[i].textContent.toLowerCase();
-            if (rowText.includes(searchText)) {
-                rows[i].style.display = "";
+    function search() {
+        var input, filter, books, value, txtValue;
+        input = document.getElementById('searchInput');
+        filter = input.value.toUpperCase();
+        input.value = filter;
+        items = document.querySelectorAll(".row");
+        books = document.getElementsByClassName("item");
+        values = document.getElementsByClassName("value");
+        for (i = 0; i < items.length/2; i++) {
+            var display = "no";
+            for (j = i*3; j < i*3 + 3; j++) {
+                if (values[j].textContent.toUpperCase().includes(filter)) {
+                    display = "yes";
+                }
+            }
+            if (display == "yes") {
+                items[i*2].style.display = "";
+                items[i*2 + 1].style.display = "";
             } else {
-                rows[i].style.display = "none";
+                items[i*2].style.display = "none";
+                items[i*2 + 1].style.display = "none";
             }
         }
         currentPage = 1; // Reset ke halaman pertama setelah pencarian
         updatePaginationButtons();
-    });
+    }
+
+    // document.getElementById('searchInput').addEventListener('keyup', function() {
+    //     var searchText = this.value.toLowerCase();
+    //     var items = document.querySelectorAll('.item');
+    //     var rows = document.querySelectorAll('.book');
+    //     for (var i = 0; i < rows.length; i++) {
+    //         var rowText = rows[i].textContent.toLowerCase();
+    //         if (rowText.includes(searchText)) {
+    //             items[i].style.display = "";
+    //         } else {
+    //             items[i].style.display = "none";
+    //         }
+    //     }
+    //     currentPage = 1; // Reset ke halaman pertama setelah pencarian
+    //     updatePaginationButtons();
+    // });
 </script>
+</body>
 </html>

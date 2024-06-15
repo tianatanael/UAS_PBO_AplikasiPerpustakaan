@@ -30,10 +30,27 @@ body {
     list-style: none;
 }
 
-.navigation ul li {
+.navigation ul li a {
     font-family: 'Trebuchet MS', sans-serif;
     color:rgb(214, 18, 0);
     margin-left: 20px;
+    text-decoration: none;
+}
+
+.navigation ul li a:hover {
+    font-family: 'Trebuchet MS', sans-serif;
+    color:maroon;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+#link-tambah{
+    color: rgb(44, 24, 172);
+    text-decoration: none;
+}
+
+#link-tambah:hover {
+    color: rgb(13, 13, 69);
 }
 
 main {
@@ -89,4 +106,61 @@ main {
 
 .book .value {
     width: 75%;
+}
+
+.link a {
+    font-style: italic;
+    color: rgb(214, 18, 0);
+} 
+
+.link a:hover {
+    font-style: italic;
+    color: maroon;
+}
+
+.link-edit a {
+    font-style: italic;
+    color: rgb(44, 24, 172);
+}
+
+.link-edit a:hover {
+    font-style: italic;
+    color: rgb(13, 13, 69);
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+}
+
+.pagination a{
+    background-color: white;
+    border: 1px black solid;
+    padding: 10px;
+    margin: 10px;
+}
+
+.pagination button {
+    font-family: 'Trebuchet MS', sans-serif;
+    background-color: white;
+    color:rgb(70, 70, 70);
+    border: 1px rgb(214, 18, 0) solid;
+    padding: 10px 13px;
+    margin: 0;
+}
+
+.pagination button:hover {
+    background-color: whitesmoke;
+}
+
+#previous button {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#next button {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

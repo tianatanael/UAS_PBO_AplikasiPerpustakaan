@@ -43,10 +43,12 @@ def closeDb():
 # Home
 @application.route('/')
 def home():
-    if 'id' in session:
-        return redirect(url_for('staff_dashboard'))
     if 'staff_forgot' in session:
         return redirect(url_for('staff_forgot_entry'))
+    if 'id' in session:
+        id = True
+    else:
+        id = False
 
     openDb()
     container = []
@@ -56,13 +58,13 @@ def home():
     for data in results:
         container.append(data)
     closeDb()
-    return render_template ('home.html', container=container, home=True)
+    return render_template ('home.html', container=container, id=id)
 
 # Login
 @application.route('/staff/login/', methods=['GET','POST'])
 def staff_login():
     if 'id' in session:
-        return redirect(url_for('staff_dashboard'))
+        return redirect(url_for('home'))
     if 'staff_forgot' in session:
         return redirect(url_for('staff_forgot_entry'))
 
@@ -78,7 +80,7 @@ def staff_login():
 
         if user and check_password_hash(user[1], password):
             session["id"] = user[0]
-            return redirect(url_for("staff_dashboard"))
+            return redirect(url_for("home"))
         else:
             return render_template("staff_login.html", error="Invalid NIK or password!")
     return render_template("staff_login.html")
@@ -89,7 +91,7 @@ SECRET_CODE = "0019"
 @application.route('/staff/register/', methods=['GET','POST'])
 def staff_register():
     if 'id' in session:
-        return redirect(url_for('staff_dashboard'))
+        return redirect(url_for('home'))
     if 'staff_forgot' in session:
         return redirect(url_for('staff_forgot_entry'))
 
@@ -122,23 +124,6 @@ def staff_register():
         return redirect(url_for("staff_login"))
     
     return render_template('staff_register.html', id=generated_id)
-
-# @application.route('/staff/dashboard/')
-# def staff_dashboard():
-#     if 'id' not in session:
-#         return redirect(url_for('home'))
-#     if 'staff_forgot' in session:
-#         return redirect(url_for('staff_forgot_entry'))
-
-#     openDb()
-#     container = []
-#     sql = "SELECT * FROM buku ORDER BY id_buku ASC;"
-#     cursor.execute(sql)
-#     results = cursor.fetchall()
-#     for data in results:
-#         container.append(data)
-#     closeDb()
-#     return render_template('staff_dashboard.html', container=container, home=True)
 
 @application.route('/clear_session1/')
 def clear_session1():
@@ -229,7 +214,7 @@ def staff_tambah_buku():
         cursor.execute(sql, val)
         conn.commit()
         closeDb()
-        return redirect(url_for('staff_dashboard'))        
+        return redirect(url_for('home'))        
     else:
         return render_template('staff_tambah_buku.html', id_buku=generated_id_buku)  # Mengirimkan NIK otomatis ke template
 
@@ -258,7 +243,7 @@ def staff_edit_buku(id_buku):
         cursor.execute(sql, val)
         conn.commit()
         closeDb()
-        return redirect(url_for('staff_dashboard'))
+        return redirect(url_for('home'))
     
     else:
         closeDb()
@@ -268,7 +253,7 @@ def staff_edit_buku(id_buku):
 @application.route('/print/<id_buku>', methods=['GET'])
 def get_employee_data(id_buku):
     if 'id' in session:
-        return redirect(url_for('staff_dashboard'))
+        return redirect(url_for('home'))
     if 'staff_forgot' in session:
         return redirect(url_for('staff_forgot_entry'))
 
@@ -314,7 +299,7 @@ def hapus(id):
     cursor.execute('DELETE FROM buku WHERE id_buku=%s', (id))
     conn.commit()
     closeDb()
-    return redirect(url_for('staff_dashboard'))
+    return redirect(url_for('home'))
 
 #Create Model
 class Users(db.Model):
