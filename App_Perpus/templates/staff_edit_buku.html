@@ -78,15 +78,21 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="TERSEDIA">Jumlah tersedia:</label>
-                        <input type="int" name="jmlhtersedia" class="form-control" value="{{ data[6] }}" size="20" maxlength="3" placeholder="Jumlah tersedia buku" required>
+                        <label for="TERSEDIA">Jumlah Tersedia:</label>
+                        <input type="int" name="tersedia" class="form-control" value="{{ data[7] }}" size="20" maxlength="3" placeholder="Jumlah buku yang tersedia" required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="JUMLAH">Jumlah Buku:</label>
+                        <input type="int" name="jumlah" class="form-control" value="{{ data[6] }}" size="20" maxlength="3" placeholder="Jumlah buku seluruhnya" required>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="TANGGAL_MASUK">Tanggal masuk:</label>
-                        <input type="date" name="tglmasuk" class="form-control" value="{{ data[7] }}" required>
+                        <input type="date" name="tglmasuk" class="form-control" value="{{ data[8] }}" required>
                     </div>
                 </div>
             </div>

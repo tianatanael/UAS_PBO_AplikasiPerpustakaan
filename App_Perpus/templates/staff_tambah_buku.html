@@ -71,7 +71,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="LOKASI">Lokasi:</label>
-                        <input type="text" name="lokasi" class="form-control" value="{{ form_data.lokasi if form_data else '' }}" size="20" maxlength="50" placeholder="Lokasi terbit buku" required>
+                        <input type="text" name="lokasi" class="form-control" value="{{ form_data.lokasi if form_data else '' }}" size="20" maxlength="50" placeholder="Lokasi buku" required>
                     </div>
                 </div>
             </div>
@@ -79,18 +79,17 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="JUMLAH">Jumlah:</label>
-                        <input type="int" name="jumlah" class="form-control" value="{{ form_data.jumlah if form_data else '' }}" size="20" maxlength="3" placeholder="Jumlah buku" required>
+                        <label for="JUMLAH">Jumlah Buku:</label>
+                        <input type="int" name="jumlah" class="form-control" value="{{ form_data.jumlah if form_data else '' }}" size="20" maxlength="3" placeholder="Jumlah buku seluruhnya" required>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="TERSEDIA">Tersedia:</label>
-                        <input type="int" name="tersedia" class="form-control" value="{{ form_data.tersedia if form_data else '' }}" size="20" maxlength="3" placeholder="Buku yang tersedia" required>
+                        <label for="TERSEDIA">Jumlah Tersedia:</label>
+                        <input type="int" name="tersedia" class="form-control" value="{{ form_data.tersedia if form_data else '' }}" size="20" maxlength="3" placeholder="Jumlah buku yang tersedia" required>
                     </div>
                 </div>
-
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="TANGGAL_MASUK">Tanggal masuk:</label>
@@ -98,9 +97,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
         <div class="card-footer text-center">
           <input type="submit" class="btn btn-success" value="Simpan">
           <input type="button" class="btn btn-secondary" value="Batal" onclick="cancel()">
