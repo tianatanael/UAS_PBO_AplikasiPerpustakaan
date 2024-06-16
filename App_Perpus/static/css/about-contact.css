@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 50px 26px;
+    background-color: white;
+    border-bottom: 1px rgb(239, 60, 60) solid;
+}
+
+.logo a {
+    font-size: xx-large;
+    color: #d61200;
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: italic;
+    text-decoration: none;
+}
+
+.navigation ul {
+    display: flex;
+    list-style: none;
+}
+
+.navigation ul li a {
+    font-family: 'Trebuchet MS', sans-serif;
+    color:rgb(214, 18, 0);
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.navigation ul li a:hover {
+    font-family: 'Trebuchet MS', sans-serif;
+    color:maroon;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+#link-tambah{
+    color: rgb(55, 32, 198);
+    text-decoration: none;
+}
+
+#link-tambah:hover {
+    color: rgb(13, 13, 69);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    margin: 1% 15%;
+    font-family: "Jost", sans-serif;
+    color:rgb(29, 29, 29);
+    color: #3d0500;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 400;
+    color: #d61200;
+}
+
+.main {
+    margin: 0 5%;
+    font-size: 1.2rem;
+}
+
+.main p {
+    margin: 0;
+}
+
+.divider {
+    margin: 3% 70% 3% 0;
+    border: 1px solid #3d0500;
+}
+
+.tab {
+    padding-left: 3rem;
+}
+
+.info .label {
+    width: 4rem;
+}
+
+.info .value {
+    padding-left: 2px;
+}

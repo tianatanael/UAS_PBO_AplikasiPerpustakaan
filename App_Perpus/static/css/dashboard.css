@@ -10,14 +10,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 45px;
+    padding: 24px 50px 26px;
     background-color: white;
     border-bottom: 1px rgb(239, 60, 60) solid;
 }
 
 .logo a {
     font-size: xx-large;
-    color: rgb(214, 18, 0);
+    color: #d61200;
     font-family: "Jost", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
@@ -45,7 +45,7 @@ body {
 }
 
 #link-tambah{
-    color: rgb(44, 24, 172);
+    color: rgb(55, 32, 198);
     text-decoration: none;
 }
 

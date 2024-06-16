@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JakartaPustaka | About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/site.webmanifest') }}">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about-contact.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="/"><b>Jakarta</b>Pustaka</a>
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                {% if id %}
+                <li><a id="link-tambah" href="/staff/collection/tambah">Tambah</a></li>
+                {% endif %}
+                {% if id %}
+                <li><a href="/staff/logout/">Logout</a></li>
+                {% else %}
+                <li><a href="/staff/login/">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>About</h1>
+        <div class="main">
+            <p>Jakarta Pustaka didirikan pada tahun 2010 oleh John Doe. <br><br>
+                
+                <span class="tab"></span>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Numquam culpa harum amet sequi labore officiis maxime possimus quasi aut fugiat provident, pariatur quia id laborum quas laudantium impedit aspernatur mollitia.
+                Velit ea quidem animi eligendi numquam tempora ducimus libero quia voluptatem ab. 
+                Laudantium saepe odio minus. Maxime blanditiis assumenda aut ipsa adipisci possimus, reiciendis nesciunt, tenetur quas provident pariatur.</p>
+            <div class="divider">
+            </div>
+            <p>Jakarta Pustaka was founded in 2010 by John Doe. <br><br>
+                
+                <span class="tab"></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Dicta velit, et, vero, maiores suscipit nobis maxime facere error dolorum itaque eum nihil pariatur modi id expedita. 
+                Iusto, quidem necessitatibus. Minima?
+                Amet facilis alias numquam quidem quam sunt tempore, rem modi. 
+                Aut corrupti impedit ullam assumenda error minima, optio numquam, odio id tempore est incidunt? 
+                Porro eius id ratione eligendi expedita.</p>
+        </div>
+    </main>
+</body>
+</html>

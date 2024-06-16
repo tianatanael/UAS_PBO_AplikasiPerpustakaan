@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JakartaPustaka | Contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/site.webmanifest') }}">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about-contact.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="/"><b>Jakarta</b>Pustaka</a>
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                {% if id %}
+                <li><a id="link-tambah" href="/staff/collection/tambah">Tambah</a></li>
+                {% endif %}
+                {% if id %}
+                <li><a href="/staff/logout/">Logout</a></li>
+                {% else %}
+                <li><a href="/staff/login/">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Contact</h1>
+        <div class="main">
+            <table class="info">
+                <tr>
+                    <td class="label">Email</td>
+                    <td>: </td>
+                    <td class="value">jakartapustaka@mail.com</td>
+                </tr>
+                <tr>
+                    <td class="label">Telp.</td>
+                    <td>: </td>
+                    <td class="value">021-1234-5678</td>
+                </tr>
+                <tr>
+                    <td class="label">Fax</td>
+                    <td>: </td>
+                    <td class="value">0885-8885-5888</td>
+                </tr>
+            </table>
+                <p>Instagram/Twitter/TikTok  : jktpustaka.id</p>
+        </div>
+    </main>
+</body>
+</html>

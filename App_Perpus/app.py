@@ -61,6 +61,7 @@ def home():
     closeDb()
     return render_template ('home.html', container=container, id=id)
 
+# Halaman data buku
 @application.route('/collection/<id_buku>/')
 def book(id_buku):
     if 'staff_forgot' in session:
@@ -75,7 +76,28 @@ def book(id_buku):
     cursor.execute(sql)
     data = cursor.fetchone()
     closeDb()
-    return render_template ('book.html', data=data, id=id)
+    return render_template('book.html', data=data, id=id)
+
+# Halaman about
+@application.route("/about/")
+def about():
+    if 'id' in session:
+        id = True
+    else:
+        id = False
+
+    return render_template('about.html', id=id)
+
+# Halaman contact
+@application.route("/contact/")
+def contact():
+    if 'id' in session:
+        id = True
+    else:
+        id = False
+
+    return render_template('contact.html', id=id)
+
 
 # Login
 @application.route('/staff/login/', methods=['GET','POST'])

@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Buku</title>
+    <title>JakartaPustaka | Data Buku</title>
+    <!-- icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="manifest" href="{{ url_for('static', filename='images/site.webmanifest') }}">
+    <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -85,7 +92,9 @@
             <a href="#"><button  class="print-btn" id-buku="{{data[0]}}" id="print-button">Print</button></a>
             {% if id %}
             <a href="/staff/collection/edit/{{data[0]}}"><button id="edit-button">Edit</button></a>
-            <a href="/staff/collection/hapus/{{data[0]}}"><button id="delete-button" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button></a>
+            <a href="/staff/collection/hapus/{{data[0]}}">
+                <button id="delete-button" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+            </a>
             {% endif %}
         </div>
     </main>
