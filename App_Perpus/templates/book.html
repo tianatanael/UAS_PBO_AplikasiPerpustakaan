@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Buku</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/book.css') }}">
+    <script src="{{ url_for('static', filename='js/jspdf.min.js') }}"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="/"><b>Jakarta</b>Pustaka</a>
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                {% if id %}
+                <li><a id="link-tambah" href="/staff/collection/tambah">Tambah</a></li>
+                {% endif %}
+                {% if id %}
+                <li><a href="/staff/logout/">Logout</a></li>
+                {% else %}
+                <li><a href="/staff/login/">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <div class="link">
+        <a href="/">← Back</a>
+    </div>
+    <main>
+        <h1>Data Buku</h1>
+        <div class="divider"></div>
+        <table class="book">
+            <tr>
+                <td class="label">ID</td>
+                <td>:</td>
+                <td class="value">{{data[0]}}</td>
+                <td class="space"></td>
+            </tr>
+            <tr>
+                <td class="label">Judul</td>
+                <td>:</td>
+                <td class="value">{{data[1]}}</td>
+            </tr>
+            <tr>
+                <td class="label">Pengarang</td>
+                <td>:</td>
+                <td class="value">{{data[2]}}</td>
+            </tr>
+            <tr>
+                <td class="label">Penerbit</td>
+                <td>:</td>
+                <td class="">{{data[3]}}</td>
+            </tr>
+            <tr>
+                <td class="label">Tgl. Terbit</td>
+                <td>:</td>
+                <td class="">{{data[4]}}</td>
+            </tr>
+            <tr>
+                <td class="label">Lokasi</td>
+                <td>:</td>
+                <td class="">{{data[5]}}</td>
+            </tr>
+            <tr>
+                <td class="label">Tersedia</td>
+                <td>:</td>
+                <td class="">{{data[6]}}/{{data[7]}}</td>
+            </tr>
+            <tr>
+                <td class="label">Tgl. Masuk</td>
+                <td>:</td>
+                <td class="">{{data[8]}}</td>
+            </tr>
+        </table>
+        <div class="divider-bottom"></div>
+        <div class="options">
+            <a href="#"><button  class="print-btn" id-buku="{{data[0]}}" id="print-button">Print</button></a>
+            {% if id %}
+            <a href="/staff/collection/edit/{{data[0]}}"><button id="edit-button">Edit</button></a>
+            <a href="/staff/collection/hapus/{{data[0]}}"><button id="delete-button">Delete</button></a>
+            {% endif %}
+        </div>
+    </main>
+<script>
+    //fungsi untuk print ke pdf
+    function printToPDF(id_buku) {
+            // Mengambil data pegawai dari server berdasarkan id_buku
+            fetch(`/print/${id_buku}`)
+            .then(response => response.json())
+            .then(data => {
+                var doc = new jsPDF();
+                
+                doc.text(70, 20, `Data Buku ${data.id_buku}`);
+                
+                // Mengubah data.tgllahir menjadi objek Date
+                var tanggalTerbit = new Date(data.tglterbit);
+                var tanggalMasuk = new Date(data.tglmasuk);
+
+                // Format tanggal, bulan, dan tahun ke dalam format DD/MM/YYYY
+                var formattedTerbit = `${tanggalTerbit.getDate()} ${tanggalTerbit.toLocaleString('id-ID', { month: 'long' })} ${tanggalTerbit.getFullYear()}`;
+                var formattedMasuk = `${tanggalMasuk.getDate()} ${tanggalMasuk.toLocaleString('id-ID', { month: 'long' })} ${tanggalMasuk.getFullYear()}`;
+
+                var judul = `Judul: ${data.judul}`;
+                var pengarang = `Pengarang: ${data.penulis}`;
+                textJudul = doc.setFontSize(12)
+                .splitTextToSize(judul, 170);
+                textPengarang = doc.setFontSize(12)
+                .splitTextToSize(pengarang, 170);
+                // Menambahkan data ke PDF berdasarkan data pegawai yang diperoleh
+                let verticalOffset = 40;
+                doc.text(20, verticalOffset, `ID: ${data.id_buku}`);
+                verticalOffset += 10;
+                doc.text(20, verticalOffset, judul);
+                verticalOffset += (textJudul.length * 10);
+                doc.text(20, verticalOffset, textPengarang);
+                verticalOffset += (textPengarang.length * 10);
+                doc.text(20, verticalOffset, `Tgl. Terbit: ${formattedTerbit}`);
+                verticalOffset += 10;
+                doc.text(20, verticalOffset, `Lokasi: ${data.lokasi}`);
+                verticalOffset += 10;
+                doc.text(20, verticalOffset, `Tersedia: ${data.tersedia}/${data.jumlah}`);
+                verticalOffset += 10;
+                doc.text(20, verticalOffset, `Tgl. Masuk: ${formattedMasuk}`);
+                verticalOffset += 20;
+                const date = new Date();
+
+                let day = date.getDate();
+                let month = date.getMonth() + 1;
+                let year = date.getFullYear();
+
+                let currentDate = `${year}-${month}-${day}`;
+                doc.text(20, verticalOffset, `Fetched on ${currentDate}`)
+                    
+                // Generate pratinjau PDF sebelum menyimpan
+                var pdfOutput = doc.output('datauristring');
+                    
+                // Tampilkan pratinjau PDF dalam jendela baru
+                var iframe = "<iframe width='100%' height='100%' src='" + pdfOutput + "'></iframe>";
+                var x = window.open();
+                x.document.open();
+                x.document.write(iframe);
+                x.document.close();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Event Listener untuk tombol Print
+        var printButtons = document.querySelectorAll('.print-btn');
+        printButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                var id_buku = this.getAttribute('id-buku'); // Ambil id_buku dari atribut data-id_buku tombol
+                printToPDF(id_buku);
+            });
+        });      
+</script>
+</body>
+</html>

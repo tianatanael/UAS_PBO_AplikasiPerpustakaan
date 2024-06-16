@@ -145,9 +145,9 @@ main {
 .pagination button {
     font-family: 'Trebuchet MS', sans-serif;
     background-color: white;
-    color:rgb(70, 70, 70);
-    border: 1px rgb(214, 18, 0) solid;
-    padding: 10px 13px;
+    color:rgb(80, 80, 80);
+    border: 1px rgb(80, 80, 80) solid;
+    padding: 10px 15px;
     margin: 0;
 }
 
@@ -163,4 +163,8 @@ main {
 #next button {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+.page-item button {
+    border-right: none;
 }

@@ -79,8 +79,15 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="TERSEDIA">Jumlah tersedia:</label>
-                        <input type="int" name="jmlhtersedia" class="form-control" value="{{ form_data.jmlhtersedia if form_data else '' }}" size="20" maxlength="3" placeholder="Jumlah tersedia buku" required>
+                        <label for="JUMLAH">Jumlah:</label>
+                        <input type="int" name="jumlah" class="form-control" value="{{ form_data.jumlah if form_data else '' }}" size="20" maxlength="3" placeholder="Jumlah buku" required>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="TERSEDIA">Tersedia:</label>
+                        <input type="int" name="tersedia" class="form-control" value="{{ form_data.tersedia if form_data else '' }}" size="20" maxlength="3" placeholder="Buku yang tersedia" required>
                     </div>
                 </div>
 

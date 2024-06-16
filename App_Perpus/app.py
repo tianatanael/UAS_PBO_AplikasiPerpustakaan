@@ -42,6 +42,7 @@ def closeDb():
 # Halaman-halaman dalam aplikasi
 # Home
 @application.route('/')
+@application.route('/collection/')
 def home():
     if 'staff_forgot' in session:
         return redirect(url_for('staff_forgot_entry'))
@@ -59,6 +60,22 @@ def home():
         container.append(data)
     closeDb()
     return render_template ('home.html', container=container, id=id)
+
+@application.route('/collection/<id_buku>/')
+def book(id_buku):
+    if 'staff_forgot' in session:
+        return redirect(url_for('staff_forgot_entry'))
+    if 'id' in session:
+        id = True
+    else:
+        id = False
+
+    openDb()
+    sql = f"SELECT * FROM buku WHERE id_buku='{id_buku}';"
+    cursor.execute(sql)
+    data = cursor.fetchone()
+    closeDb()
+    return render_template ('book.html', data=data, id=id)
 
 # Login
 @application.route('/staff/login/', methods=['GET','POST'])
@@ -205,12 +222,13 @@ def staff_tambah_buku():
         penerbit = request.form['penerbit']
         tglterbit = request.form['tglterbit']
         lokasi = request.form['lokasi']
-        jmlhtersedia = request.form['jmlhtersedia']
+        jumlah = request.form['jumlah']
+        tersedia = request.form['tersedia']
         tglmasuk = request.form['tglmasuk']
 
         openDb()
-        sql = "INSERT INTO buku (id_buku,judul,penulis,penerbit,tglterbit,lokasi,jmlhtersedia,tglmasuk) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (id_buku,judul,penulis,penerbit,tglterbit,lokasi,jmlhtersedia,tglmasuk)
+        sql = "INSERT INTO buku (id_buku,judul,penulis,penerbit,tglterbit,lokasi,jumlah, tersedia,tglmasuk) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        val = (id_buku,judul,penulis,penerbit,tglterbit,lokasi,jumlah, tersedia, tglmasuk)
         cursor.execute(sql, val)
         conn.commit()
         closeDb()
@@ -252,11 +270,6 @@ def staff_edit_buku(id_buku):
 #fungsi cetak ke PDF
 @application.route('/print/<id_buku>', methods=['GET'])
 def get_employee_data(id_buku):
-    if 'id' in session:
-        return redirect(url_for('home'))
-    if 'staff_forgot' in session:
-        return redirect(url_for('staff_forgot_entry'))
-
     # Koneksi ke database
     connection = pymysql.connect(host='localhost',
                                  user='root',
