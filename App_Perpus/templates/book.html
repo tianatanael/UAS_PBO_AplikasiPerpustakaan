@@ -85,7 +85,7 @@
             <a href="#"><button  class="print-btn" id-buku="{{data[0]}}" id="print-button">Print</button></a>
             {% if id %}
             <a href="/staff/collection/edit/{{data[0]}}"><button id="edit-button">Edit</button></a>
-            <a href="/staff/collection/hapus/{{data[0]}}"><button id="delete-button">Delete</button></a>
+            <a href="/staff/collection/hapus/{{data[0]}}"><button id="delete-button" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button></a>
             {% endif %}
         </div>
     </main>
@@ -118,10 +118,10 @@
                 let verticalOffset = 40;
                 doc.text(20, verticalOffset, `ID: ${data.id_buku}`);
                 verticalOffset += 10;
-                doc.text(20, verticalOffset, judul);
-                verticalOffset += (textJudul.length * 10);
+                doc.text(20, verticalOffset, textJudul);
+                verticalOffset += (textJudul.length * 10 - 5);
                 doc.text(20, verticalOffset, textPengarang);
-                verticalOffset += (textPengarang.length * 10);
+                verticalOffset += (textPengarang.length * 10 - 5);
                 doc.text(20, verticalOffset, `Tgl. Terbit: ${formattedTerbit}`);
                 verticalOffset += 10;
                 doc.text(20, verticalOffset, `Lokasi: ${data.lokasi}`);

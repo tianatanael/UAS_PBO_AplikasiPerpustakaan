@@ -44,9 +44,19 @@ body {
     text-decoration: none;
 }
 
+#link-tambah{
+    color: rgb(44, 24, 172);
+    text-decoration: none;
+}
+
+#link-tambah:hover {
+    color: rgb(13, 13, 69);
+}
+
 .link {
-    margin: 3% 6%;
+    margin: 3.1% 17%;
     margin-bottom: -4%;
+    font-size: .95rem;
 }
 
 .link a {
@@ -63,7 +73,7 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    margin: 0 15%;
+    margin: 0 25%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: small;
     color:rgb(29, 29, 29)
@@ -72,21 +82,21 @@ main {
 main h1 {
     font-family: "Jost", 'Trebuchet MS', sans-serif;
     font-weight: 500;
-    font-size: 2.5rem;
+    font-size: 2.3rem;
 }
 
 .divider {
     border: 1px rgb(60, 60, 60) solid;
-    margin: 0 35% 3% 0;
+    margin: 0 0 3% 0;
 }
 
 .divider-bottom {
     border: 1px rgb(60, 60, 60) solid;
-    margin: 3% 35% 0 0;
+    margin: 3% 0 0 0;
 }
 
 .book {
-    font-size: 1rem;
+    font-size: .9rem;
 }
 
 .book td{
@@ -95,26 +105,28 @@ main h1 {
 }
 
 .book .label {
-    width: 12%;
+    width: 15%;
 }
 
 .book .value {
-    width: 50%;
+    width: 81%;
 }
 
 .book .space {
-    width: 38%;
+    width: 0;
 }
 
 .options {
+    display: flex;
+    justify-content: right;
     margin: 4% 0;
 }
 
 .options button {
     font-family: 'Trebuchet MS', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     padding: 9px 14px;
-    margin-right: 5px;
+    margin-left: 0.7em;
     border-radius: 6px;
     background-color: white;
 }
