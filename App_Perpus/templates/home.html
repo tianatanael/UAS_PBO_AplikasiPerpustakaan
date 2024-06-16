@@ -71,9 +71,9 @@
                             <td class="">{{row[3]}}</td>
                         </tr>
                         <tr>
-                            <td class="label">Tgl. Terbit</td>
+                            <td class="label">Tahun Terbit</td>
                             <td>:</td>
-                            <td class="">{{row[4]}}</td>
+                            <td class="">{{row[4].strftime('%Y')}}</td>
                         </tr>
                         <tr>
                             <td class="label">Lokasi</td>
@@ -205,23 +205,7 @@
         }
         currentPage = 1; // Reset ke halaman pertama setelah pencarian
         updatePaginationButtons();
-    }
-
-    // document.getElementById('searchInput').addEventListener('keyup', function() {
-    //     var searchText = this.value.toLowerCase();
-    //     var items = document.querySelectorAll('.item');
-    //     var rows = document.querySelectorAll('.book');
-    //     for (var i = 0; i < rows.length; i++) {
-    //         var rowText = rows[i].textContent.toLowerCase();
-    //         if (rowText.includes(searchText)) {
-    //             items[i].style.display = "";
-    //         } else {
-    //             items[i].style.display = "none";
-    //         }
-    //     }
-    //     currentPage = 1; // Reset ke halaman pertama setelah pencarian
-    //     updatePaginationButtons();
-    // });
+    };
 </script>
 </body>
 </html>
