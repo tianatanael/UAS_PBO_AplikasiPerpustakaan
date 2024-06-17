@@ -20,9 +20,10 @@ Table di dalam database:
    g. jumlah (int(3))
    h. tersedia (int(3))
    i. tglmasuk (date)
+   
 2. staff
    a. id (varchar(11)) PRIMARYKEY
-   b. nik (int(11))
+   b. nik (varchar(16))
    c. nama (varchar(50))
    d. tgllahir (date)
    e. password (varchar(255))
