@@ -239,7 +239,7 @@ def staff_tambah_buku():
     if 'staff_forgot' in session:
         return redirect(url_for('staff_forgot_entry'))
     
-    generated_id_buku = generate_id_buku()  # Memanggil fungsi untuk mendapatkan NIK otomatis
+    generated_id_buku = generate_id_buku()#Memanggil fungsi untuk mendapatkan id_buku otomatis
     
     if request.method == 'POST':
         id_buku = request.form['id_buku']
@@ -259,7 +259,7 @@ def staff_tambah_buku():
         closeDb()
         return redirect(url_for('home'))        
     else:
-        return render_template('staff_tambah_buku.html', id_buku=generated_id_buku)  # Mengirimkan NIK otomatis ke template
+        return render_template('staff_tambah_buku.html', id_buku=generated_id_buku)
 
 @application.route('/staff/collection/edit/<id_buku>', methods=['GET','POST'])
 def staff_edit_buku(id_buku):
@@ -294,7 +294,7 @@ def staff_edit_buku(id_buku):
 
 #fungsi cetak ke PDF
 @application.route('/print/<id_buku>', methods=['GET'])
-def get_employee_data(id_buku):
+def get_book_data(id_buku):
     # Koneksi ke database
     connection = pymysql.connect(host='localhost',
                                  user='root',
