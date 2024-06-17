@@ -20,6 +20,7 @@ Table di dalam database:
    g. jumlah (int(3))
    h. tersedia (int(3))
    i. tglmasuk (date)
+   
 2. staff
    a. id (varchar(11)) PRIMARYKEY
    b. nik (varchar(16))
