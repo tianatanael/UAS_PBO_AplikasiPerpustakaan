@@ -6,13 +6,13 @@ Semua Pengguna dapat:
 - memprint data buku (nama, author, lokasi dalam perpustakaan)
 
 Staff dapat:
-- tambah buku, hapus buku, edit data buku
+- tambah buku, hapus buku, edit data buku, print data buku
 
 =====================================================================================
 
 Database:
-1. staff (id, nik, nama, tgllahir, dll)
-2. buku (id_buku, judul, penulis, penerbit, tahunterbit, lokasi tersedia)
+1. staff (id, nik, nama, tgllahir, password)
+2. buku (id_buku, judul, penulis, penerbit, tanggal terbit, lokasi, jumlah, tersedia, tanggal masuk)
 
 HTML:
 1. Homepage/dashboard ("/")
@@ -46,3 +46,9 @@ HTML:
 
 7. *Halaman edit buku ("/collection/editbuku/<id_buku>")
 - staff mengedit data buku
+
+8. *Halaman forgot password("/staff/forgot/")
+- staff diminta memasukan ID dan NIK yang sesuai dengan data agar bisa mengganti password
+
+9. *Halaman forgot password entry("/staff/forgot/entry/")
+- staff dapat memasukan password baru dan akan login dengan password yang baru diinput

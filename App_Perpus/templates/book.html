@@ -69,7 +69,7 @@
             <tr>
                 <td class="label">Tgl. Terbit</td>
                 <td>:</td>
-                <td class="">{{data[4]}}</td>
+                <td class="">{{data[4].strftime('%d-%m-%Y')}}</td>
             </tr>
             <tr>
                 <td class="label">Lokasi</td>
@@ -84,7 +84,7 @@
             <tr>
                 <td class="label">Tgl. Masuk</td>
                 <td>:</td>
-                <td class="">{{data[8]}}</td>
+                <td class="">{{date_string}}</td>
             </tr>
         </table>
         <div class="divider-bottom"></div>
@@ -147,14 +147,15 @@
                 verticalOffset += 10;
                 doc.text(20, verticalOffset, `Tgl. Masuk: ${formattedMasuk}`);
                 verticalOffset += 20;
-                const date = new Date();
+
+                let date = new Date();
 
                 let day = date.getDate();
-                let month = date.getMonth() + 1;
+                let month = date.toLocaleString('id-ID', { month: 'long' })
                 let year = date.getFullYear();
 
-                let currentDate = `${year}-${month}-${day}`;
-                doc.text(20, verticalOffset, `Fetched on ${currentDate}`)
+                let currentDate = `${day} ${month} ${year}`;
+                doc.text(20, verticalOffset, `Dicetak pada: ${currentDate}`)
                     
                 // Generate pratinjau PDF sebelum menyimpan
                 var pdfOutput = doc.output('datauristring');

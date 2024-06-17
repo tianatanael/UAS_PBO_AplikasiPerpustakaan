@@ -6,6 +6,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 import pymysql.cursors, os, datetime, random, string
+import locale
+from datetime import datetime
 
 application = Flask(__name__)
 conn = cursor = None
@@ -75,8 +77,10 @@ def book(id_buku):
     sql = f"SELECT * FROM buku WHERE id_buku='{id_buku}';"
     cursor.execute(sql)
     data = cursor.fetchone()
+    locale.setlocale(locale.LC_TIME, 'id_ID')# Set the locale to Indonesian
+    date_string = data[8].strftime('%A, %d-%m-%Y')# Assume data[8] is a datetime object
     closeDb()
-    return render_template('book.html', data=data, id=id)
+    return render_template('book.html', data=data, id=id, date_string=date_string)
 
 # Halaman about
 @application.route("/about/")
@@ -147,13 +151,13 @@ def staff_register():
         confirm_pwd = request.form['confirm_password']
 
         if password != confirm_pwd:
-            return render_template('staff_register.html', nia=generated_id, error='Passwords do not match!')
+            return render_template('staff_register.html', id=generated_id, error='Passwords do not match!')
 
         hashed_password = generate_password_hash(password) #Hash the password
 
         code = request.form["code"]
         if code != SECRET_CODE:
-            return render_template('staff_register.html', nia=generated_id, error="Wrong Code.")
+            return render_template('staff_register.html', id=generated_id, error="Wrong Code.")
 
         openDb()
         # SQL SYNTAX untuk memasukan username dan password di tabel karyawan
@@ -198,7 +202,7 @@ def staff_forgot_entry():
     if 'id' in session:
         return redirect(url_for('home'))
     if 'staff_forgot' not in session:
-        return redirect(url_for('staff_forgot_entry'))
+        return redirect(url_for('staff_forgot'))
 
     if request.method == "POST":
         password = request.form['password']
@@ -245,12 +249,11 @@ def staff_tambah_buku():
         tglterbit = request.form['tglterbit']
         lokasi = request.form['lokasi']
         jumlah = request.form['jumlah']
-        tersedia = request.form['tersedia']
         tglmasuk = request.form['tglmasuk']
 
         openDb()
         sql = "INSERT INTO buku (id_buku,judul,penulis,penerbit,tglterbit,lokasi,jumlah, tersedia,tglmasuk) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (id_buku,judul,penulis,penerbit,tglterbit,lokasi,jumlah, tersedia, tglmasuk)
+        val = (id_buku,judul,penulis,penerbit,tglterbit,lokasi,jumlah, jumlah, tglmasuk)
         cursor.execute(sql, val)
         conn.commit()
         closeDb()
