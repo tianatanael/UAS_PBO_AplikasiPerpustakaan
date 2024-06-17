@@ -11,19 +11,19 @@ Database yang diperlukan:
    
 Table di dalam database: 
 1. buku
-   a. id_buku (varchar(8)) PRIMARYKEY
-   b. judul (varchar(100))
-   c. penulis (varchar(100))
-   d. penerbit (varchar(50))
-   e. tglterbit (date)
-   f. lokasi (varchar(50))
-   g. jumlah (int(3))
-   h. tersedia (int(3))
-   i. tglmasuk (date)
-   
+- id_buku (varchar(8)) PRIMARYKEY
+- judul (varchar(100))
+- penulis (varchar(100))
+- penerbit (varchar(50))
+- tglterbit (date)
+- lokasi (varchar(50))
+- jumlah (int(3))
+- tersedia (int(3))
+- tglmasuk (date)
+- 
 2. staff
-   a. id (varchar(11)) PRIMARYKEY
-   b. nik (varchar(16))
-   c. nama (varchar(50))
-   d. tgllahir (date)
-   e. password (varchar(255))
+- id (varchar(11)) PRIMARYKEY
+- nik (varchar(16))
+- nama (varchar(50))
+- tgllahir (date)
+- password (varchar(255))
