@@ -128,9 +128,17 @@
                 doc.text(20, verticalOffset, `ID: ${data.id_buku}`);
                 verticalOffset += 10;
                 doc.text(20, verticalOffset, textJudul);
-                verticalOffset += (textJudul.length * 10 - 5);
+                if (textJudul.length > 1) {
+                    verticalOffset += 15;
+                } else {
+                    verticalOffset += 10;
+                }
                 doc.text(20, verticalOffset, textPengarang);
-                verticalOffset += (textPengarang.length * 10 - 5);
+                if (textPengarang.length > 1) {
+                    verticalOffset += 15;
+                } else {
+                    verticalOffset += 10;
+                }
                 doc.text(20, verticalOffset, `Tgl. Terbit: ${formattedTerbit}`);
                 verticalOffset += 10;
                 doc.text(20, verticalOffset, `Lokasi: ${data.lokasi}`);
