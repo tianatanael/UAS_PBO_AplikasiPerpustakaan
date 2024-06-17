@@ -119,7 +119,7 @@ def staff_login():
             session["id"] = user[0]
             return redirect(url_for("home"))
         else:
-            return render_template("staff_login.html", error="Invalid NIK or password!")
+            return render_template("staff_login.html", error="Invalid ID or password!")
     return render_template("staff_login.html")
 
 SECRET_CODE = "0019"
