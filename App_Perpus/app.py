@@ -24,10 +24,6 @@ application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://username:password@local
 db = SQLAlchemy(application)    
 mysql = MySQL(application)
 
-#variabel untuk menyimpan lokasi foto
-UPLOAD_FOLDER = 'E:\\FILE OCTA\\KULIAH\\SEMESTER 2\\WEB OOP\\UAS_OOP\\App_Perpus\\static\\images'
-application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 #fungsi koneksi ke basis data
 def openDb():
     global conn, cursor
@@ -39,7 +35,6 @@ def closeDb():
     global conn, cursor
     cursor.close()
     conn.close()
-
 
 # Halaman-halaman dalam aplikasi
 # Home
@@ -101,7 +96,6 @@ def contact():
         id = False
 
     return render_template('contact.html', id=id)
-
 
 # Login
 @application.route('/staff/login/', methods=['GET','POST'])
