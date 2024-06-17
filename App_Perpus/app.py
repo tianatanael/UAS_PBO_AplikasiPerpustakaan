@@ -202,7 +202,7 @@ def staff_forgot_entry():
     if 'id' in session:
         return redirect(url_for('home'))
     if 'staff_forgot' not in session:
-        return redirect(url_for('staff_forgot_entry'))
+        return redirect(url_for('staff_forgot'))
 
     if request.method == "POST":
         password = request.form['password']
